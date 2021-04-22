@@ -4,16 +4,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.task.taskmain.TitleFragment">
-<!--    <data>-->
-<!--        <variable-->
-<!--            name="taskViewModel"-->
-<!--            type="com.example.task.taskmain.TaskViewModel" />-->
-<!--    </data>-->
+    <data>
+        <variable
+            name="taskViewModel"
+            type="com.example.task.addtasks.TaskViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tasks"
+            android:layout_width="match_parent"
+            android:clipToPadding="false"
+            android:layout_height="match_parent"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="20dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:listData="@{taskViewModel.tasks}"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton"
@@ -26,51 +41,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@android:drawable/ic_input_add" />
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-
-            <LinearLayout
-                android:id="@+id/linear_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="20dp">
-
-
-
-                <CheckBox
-                    android:id="@+id/checkBox1"
-                    android:background="@drawable/custom_checkbox"
-                    style="@style/checkbox_style"
-                    android:text="@string/check_box_1" />
-
-                <CheckBox
-                    android:id="@+id/checkBox2"
-                    android:background="@drawable/custom_checkbox"
-                    style="@style/checkbox_style"
-                    android:text="@string/check_box_2" />
-
-                <CheckBox
-                    android:id="@+id/checkBox3"
-                    android:background="@drawable/custom_checkbox"
-                    style="@style/checkbox_style"
-                    android:text="@string/check_box_3" />
-
-                <CheckBox
-                    android:id="@+id/checkBox4"
-                    android:background="@drawable/custom_checkbox"
-                    style="@style/checkbox_style"
-                    android:text="@string/check_box_4" />
-
-                <CheckBox
-                    android:id="@+id/checkBox5"
-                    android:background="@drawable/custom_checkbox"
-                    style="@style/checkbox_style"
-                    android:text="@string/check_box_5" />
-            </LinearLayout>
-        </ScrollView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

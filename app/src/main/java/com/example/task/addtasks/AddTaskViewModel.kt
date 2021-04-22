@@ -20,12 +20,13 @@ class AddTaskViewModel(
    }
    // val taskData: List<TaskData>? =null
 
-    fun insert(text: String) {
+    fun insert(name: String,desc: String) {
         uiScope.launch {
             withContext(Dispatchers.IO) {
 
                 var taskData: TaskData = TaskData()
-                taskData.taskName= text.toString()
+                taskData.taskName= name.toString()
+                taskData.taskDescription=desc.toString()
                 database.insert(taskData)
 
             }

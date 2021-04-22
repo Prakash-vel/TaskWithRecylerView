@@ -35,7 +35,11 @@ class AddTaskFragment : Fragment() {
         binding.addTaskViewModel = addTaskViewModel
 
         binding.button3.setOnClickListener {
-            addTaskViewModel.insert(binding.editTextTextMultiLine2.text.toString())
+            val name=binding.editTextName.text.toString()
+            val desc=binding.editTextDesc.text.toString()
+
+
+            addTaskViewModel.insert(name,desc)
             Navigation.findNavController(it).navigate(R.id.action_addTaskFragment_to_titleFragment)
         }
 

@@ -16,21 +16,25 @@ class TaskViewModel(
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     var state=MutableLiveData<Boolean>()
-    var tasks: List<TaskData>?=null
+    private val _tasks= MutableLiveData<List<TaskData>>()
+
+    val tasks : LiveData<List<TaskData>>
+        get()=_tasks
+
 
     init{
         state.value=false
     }
     fun get() {
         uiScope.launch {
-            withContext(Dispatchers.IO) {
-
-                tasks=database.getAllTasks()
-
-                Log.i("addtasks","$tasks")
 
 
-            }
+                _tasks.value=database.getAllTasks()
+
+
+
+
+
             state.value=true
         }
 
@@ -49,12 +53,53 @@ class TaskViewModel(
 
     }
 
+    fun delete(taskId: Long){
+        uiScope.launch {
+            withContext(Dispatchers.IO) {
+                database.delete(taskId)
+
+                get()
+                Log.i("addtasks","delete $tasks")
+
+            }
+            state.value=true
+        }
+
+    }
+
+    fun update(taskData : TaskData ){
+        uiScope.launch {
+            withContext(Dispatchers.IO) {
+
+
+                database.update(taskData)
+
+
+                get()
+
+
+            }
+            state.value=false
+        }
+
+    }
+
+
+    var upDatestate=MutableLiveData<Boolean>()
 
 
 
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
+    }
+
+    fun upDate(it: TaskData) {
+        it.taskStatus="true"
+        it.taskEndDate=System.currentTimeMillis()
+        Log.i("hello","upDate Called$it")
+        update(it)
+
     }
 
 }
