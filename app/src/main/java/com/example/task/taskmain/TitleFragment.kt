@@ -42,7 +42,7 @@ lateinit var layout: LinearLayout
 
             val dataSource = TaskDatabase.getInstance(application).taskDatabaseDao
 
-//hello
+
 
             val viewModelFactory = TaskViewModelFactory(dataSource)
 
@@ -50,6 +50,7 @@ lateinit var layout: LinearLayout
                 ViewModelProviders.of(this, viewModelFactory).get(TaskViewModel::class.java)
             binding.lifecycleOwner = this
 
+            binding.lifecycleOwner=this
             taskViewModel.get()
             setHasOptionsMenu(true)
             val adapter=TaskAdapter((TaskAdapter.OnClickListener {
